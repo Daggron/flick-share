@@ -324,4 +324,19 @@ p{
 
 .user-profile-name p{
     line-height: 1.5em;
+    font-size: 20px;
+    font-family: 'Satisfy', cursive;
+}
+
+.user-profile-name ul {
+    list-style: none;
+    display: inline;
+}
+
+.user-profile-name ul li{
+    display: inline;
+    font-size: 20px;
+    font-family: 'Satisfy', cursive;
+    margin: 3%;
+    text-align: left;
 }

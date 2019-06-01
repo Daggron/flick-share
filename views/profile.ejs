@@ -27,18 +27,35 @@
                     <p>
                         <%= user.username %>
                     </p>
-                    <p>
+                    <!-- <p>
                         <%= user.name %>
-                    </p>
+                    </p> -->
                     <p>
                         <%= user.bio %>
                     </p>
+                    <ul>
+                        <li>
+                            <%= posts.length %>
+                        </li>
+                        <li>
+                            <%= user.follower.length %>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul>
+                        <li>
+                            Post
+                        </li>
+                        <li>
+                            Follower
+                        </li>
+                    </ul>
                 </div>
             </div>
             <% if(users.id==user._id){%>
                  <a href="update/<%=user._id%>" class="btn">Update Profile</a>
             <%} else{%>
-            <a href="/users/update/follow/<%= user._id%>" class="btn" data-id="<%= user._id%>">Follow</a>
+            <a href="/users/follow/<%= user._id%>" class="///add-follower" data-id="<%= user._id%>">Follow</a>
             <% } %>
         </div>
     </aside>
@@ -46,9 +63,12 @@
         <div id="post-bar">
             <h1>
                 Posts by <%= user.username %>
-                <hr>
+             
             </h1>
+            <hr>
+
         </div>
+    
         <div class="profile">
             <% for(var i = posts.length - 1;i >= 0;i--){ %>
                 <div class="post">

@@ -26,7 +26,10 @@ let schema = mongoose.Schema({
         type: String
     },
     follower: {
-        type: []
+        type: Array,
+        add:function add(e){
+            this.user.follower.push(e.value);
+        }
     }
 
 });

@@ -162,35 +162,6 @@ router.get('/logout',(req,res)=>{
 
 
 
-
-
-
-router.post('/update/follow/:id',urlencoded,(req,res)=>{
-
-    let query={_id:req.user._id};
-    let user={};
-    user.follower=user.follower.push(req.params.id);
-    User.update(query,user,(err)=>{
-        //res.redirect(`/users/${req.params.id}`);
-        console.log(user.follower);
-        console.log('i did this');
-        res.send("success");
-    })
-
-
-});
-
-router.get('/update/follow/:id',urlencoded,(req,res)=>{
-    User.findById({_id:req.params.id},(err,posts)=>{
-        res.redirect(`/users/${req.params.id}`);
-    });
-
-
-
-
-});
-
-
 router.get('/update/:id',(req,res)=>{
     User.findById(req.params.id,(err,found)=>{
         res.render("update.ejs",{found:found});
@@ -222,6 +193,21 @@ router.post('/update/:id',urlencoded,(req,res)=>{
 
 });
 
+router.get('/follow/:id',(req,res)=>{
+    let ab = req.params.id;
+    User.findById(req.user.id,(req,user)=>{
+        user.follower.push(ab);
+        user.save();
+        console.log(user);
+        console.log(user.follower);
+        res.send("Followed");
+
+    });
+    
+
+});
+
+
 
 router.get('/:id',(req,res)=>{
     User.findById(req.params.id,(err,user)=>{
@@ -234,10 +220,10 @@ router.get('/:id',(req,res)=>{
             }
             res.render('profile.ejs',{posts:posts,user:user});
             console.log(req.user.follower);
+            console.log(req.user.name);
         });
     })
 });
-
 
 
 

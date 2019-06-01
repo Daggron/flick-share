@@ -12,18 +12,17 @@ $('document').ready(function(){
             }
         })
     });
-
-    $('.follow').on("click",function (e) {
+    $('.add-follower').on("click",function(e){
         $target=$(e.target);
         const id=$target.attr('data-id');
         $.ajax({
-            type:'POST',
-            url:'/users/update/follow/'+id,
+            type:'GET',
+            url:'/users/follow/'+id,
             success:function(response){
-                alert('You started following');
+                alert('USer followed');
 
-                window.location.href('/users');
+                //window.location.reload();
             }
-        });
+        })
     });
 });

@@ -24,13 +24,14 @@
         <div class="container">
           <div class="outer-box">
               <% for(var i=posts.length-1;i>=0;i--){ %>
+
+                  <% if( users.follower.includes(posts[i].posted) ) {%>
               <div class="inbox">
                   <div class="post-container">
-                      <% if(users._id==posts[i].posted){ %>
 
-                      <%}%>
+
+
                       <div class="post-image">
-                        <!-- <img src="<%= posts[i].image %>"> -->
                         <img src="<%= typeof posts[i].image != 'undefined' ? posts[i].image : '' %>">
                       </div>
                       <div class="time-stamp">
@@ -55,6 +56,7 @@
 
 
                       </div>
+                      <% } %>
                      
                 </div>
               </div>

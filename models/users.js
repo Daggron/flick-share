@@ -30,6 +30,9 @@ let schema = mongoose.Schema({
         add:function add(e){
             this.user.follower.push(e.value);
         }
+    },
+    following:{
+        type:Array
     }
 
 });

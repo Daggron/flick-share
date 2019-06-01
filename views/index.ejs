@@ -21,11 +21,12 @@
          <%- messages('messages', locals) %>
 
          <% if (users){ %>
+
         <div class="container">
           <div class="outer-box">
               <% for(var i=posts.length-1;i>=0;i--){ %>
 
-                  <% if( users.follower.includes(posts[i].posted) ) {%>
+                  <% if( users.following.includes(posts[i].posted) || (users._id==posts[i].posted) ) {%>
               <div class="inbox">
                   <div class="post-container">
 
@@ -57,7 +58,7 @@
 
                       </div>
                       <% } %>
-                     
+
                 </div>
               </div>
               <% } %>

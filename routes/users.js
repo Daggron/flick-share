@@ -195,14 +195,17 @@ router.post('/update/:id',urlencoded,(req,res)=>{
 
 router.get('/follow/:id',(req,res)=>{
     let ab = req.params.id;
-    User.findById(req.user.id,(req,user)=>{
-        user.follower.push(ab);
+    User.findById(req.user.id,(err,user)=>{
+        user.following.push(ab);
         user.save();
-        console.log(user);
-        console.log(user.follower);
-        res.send("Followed");
+        User.findById(ab,(err,found)=>{
+            found.follower.push(req.user.id);
+            found.save();
+        });
+        res.redirect(`/users/`+ab);
 
     });
+
     
 
 });

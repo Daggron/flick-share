@@ -120,7 +120,7 @@ router.delete('/home/:id',(req,res)=>{
     
     if(req.user._id==found.posted){
     // To remove the file from static folder also so if they are deleted they are removed permanentaly
-        fs.unlinkSync('./public/'+found.imageAbhay,(err)=>{
+        fs.unlinkSync('./public/'+found.image,(err)=>{
           if (err) throw err;
         });
 

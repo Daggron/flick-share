@@ -10,6 +10,7 @@ const session = require('express-session');
 const config = require('./config/database');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const admin = require('./routes/admin');
 
 
 //The data base url is in the database file present in the config folder
@@ -77,8 +78,7 @@ app.use(passport.session());
 app.get('*',(req,res,next)=>{
   res.locals.users=req.user || null;
   next();
-})
-
+});
 
 app.set('view engine','ejs');
 app.use(express.static('./public/'));
@@ -86,6 +86,7 @@ app.use(express.static('./public/'));
 
 app.use('/',index);
 app.use('/users',users);
+app.use('/admin',admin);
 
 
 

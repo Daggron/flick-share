@@ -60,6 +60,7 @@
             </div>
             <% if(users.id==user._id){%>
                  <a href="update/<%=user._id%>" class="btn">Update Profile</a>
+                <a href="#"  data-id="<%=user._id %>" class="btn del-account">Delete Profile</a>
             <%} else{%>
             <a href="/users/follow/<%= user._id%>" class="///add-follower" data-id="<%= user._id%>">Follow</a>
             <% } %>

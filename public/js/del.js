@@ -25,4 +25,17 @@ $('document').ready(function(){
             }
         })
     });
+    $('.del-account').on("click",function (e) {
+        $target=$(e.target);
+        const id=$target.attr('data-id');
+        $.ajax({
+            type:'DELETE',
+            url:'/users/'+id,
+            success:function(response){
+                alert('Account Deleted');
+
+                window.location.replace('/home');
+            }
+        });
+    })
 });

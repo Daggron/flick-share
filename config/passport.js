@@ -6,9 +6,10 @@ const passport = require('passport');
 
 module.exports = function(passport){
   // Local Strategy
-  passport.use(new LocalStrategy(function(username, password, done){
+  passport.use(new LocalStrategy(function(email, password, done){
     // Match Username
-    let query = {username:username};
+    //let query = {username:username};
+    let query={email:email};
     User.findOne(query, function(err, user){
       if(err) throw err;
       if(!user){

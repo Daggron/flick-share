@@ -70,6 +70,16 @@ router.get('/', (req, res) => {
 //For registeration
 router.get('/register', (req, res) => {
     res.render('registeration', {errors: ''});
+    User.find({isActive:false},(err,user)=>{
+       User.remove({isActive:false},(err)=>{
+           if (err) throw err;
+           console.log("Kenny dit it");
+           console.log("Deleted by Kenny The Cleaner Vtriggerrrrrrrrrrrrrrrrrrrrrrrrrrrrr!!!!!!!!!!!!!!!!!!");
+       });
+    });
+    User.find({},(err,user)=>{
+        console.log(user);
+    })
 });
 
 
@@ -134,7 +144,7 @@ router.post('/register', urlencoded, (req, res) => {
                         phone: phone,
                         bio: bio,
                         profile:`profile/${req.file.filename}`,
-                        token:Math.floor(Math.random()*10000),
+                        token:Math.floor(Math.random()*1000000)+1,
                         isActive:false
 
                     });
@@ -194,16 +204,6 @@ router.post('/register', urlencoded, (req, res) => {
 });
 
 
-//
-// function kennyTheCleaner(){
-//     User.find({},(err,found)=>{
-//         User.deleteMany(found,(err)=>{
-//             if (err) throw err;
-//             console.log("Deleted by Kenny The Cleaner Vtriggerrrrrrrrrrrrrrrrrrrrrrrrrrrrr!!!!!!!!!!!!!!!!!!111");
-//         })
-//     });
-// }
-//
 
 
 router.get('/verify',(req,res)=>{

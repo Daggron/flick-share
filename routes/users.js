@@ -13,8 +13,14 @@ const config = require('../config/database');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const nodemailer = require('nodemailer');
 
 
+//for mailing the confirmation mail
+
+
+
+//for storing photos uploaded by user
 const storage = multer.diskStorage({
     destination: './public/profile/',
     filename: function (req, file, cb) {
@@ -23,6 +29,7 @@ const storage = multer.diskStorage({
 });
 
 
+//for uploading and naming file
 const upload = multer({
     storage: storage,
     // increase the size from 3000000 to let users to upload a file greater than 3 MB the units are bits so that is ehy 3MB is equal to 3000000
@@ -50,12 +57,13 @@ function checkFileType(file, cb) {
 
 
 router.get('/', (req, res) => {
-    User.find({}, (err, users) => {
+    User.find({isActive:true}, (err, users) => {
         if (err) {
             console.log(err);
         }
         res.render('users.ejs', {users: users});
     });
+    //kennyTheCleaner();
 });
 
 
@@ -125,9 +133,12 @@ router.post('/register', urlencoded, (req, res) => {
                         password: password,
                         phone: phone,
                         bio: bio,
-                        profile:`profile/${req.file.filename}`
+                        profile:`profile/${req.file.filename}`,
+                        token:Math.floor(Math.random()*10000),
+                        isActive:false
 
                     });
+                    console.log("Token"+user.token);
 
 
                     //Hashing the password in order to keep the user password save
@@ -143,8 +154,30 @@ router.post('/register', urlencoded, (req, res) => {
                                 if (err) {
                                     console.log(err);
                                 } else {
+
+                                    const transporter= nodemailer.createTransport({
+                                        service:'gmail',
+                                        auth:{
+                                            user:'returnofking04@gmail.com',
+                                            pass:'dixit1111'
+                                        }
+                                    });
+
+                                    var mailOptions={
+                                        form:'returnofking04@gmail.com',
+                                        to:`${user.email}`,
+                                        subject:"Otp from Lovedin",
+                                        text:`Your Otp is ${user.token}`
+
+                                    };
+
+                                    transporter.sendMail(mailOptions,(err,info)=>{
+                                        if(err ) throw  err;
+                                        console.log("Mail Sent");
+                                    });
+
                                     req.flash('success', 'You Have Registerd Successfully');
-                                    res.redirect('login');
+                                    res.redirect('verify');
 
                                 }
                             });
@@ -159,6 +192,52 @@ router.post('/register', urlencoded, (req, res) => {
 
 
 });
+
+
+//
+// function kennyTheCleaner(){
+//     User.find({},(err,found)=>{
+//         User.deleteMany(found,(err)=>{
+//             if (err) throw err;
+//             console.log("Deleted by Kenny The Cleaner Vtriggerrrrrrrrrrrrrrrrrrrrrrrrrrrrr!!!!!!!!!!!!!!!!!!111");
+//         })
+//     });
+// }
+//
+
+
+router.get('/verify',(req,res)=>{
+    res.render('Verify');
+});
+
+router.post('/verify',(req,res)=>{
+   let query={email:req.body.username};
+   User.findOne(query,(err,found)=>{
+       if(found){
+           if(found.token==req.body.token){
+               console.log(req.body.token);
+               found.isActive=true;
+               found.save();
+
+               req.flash("Success","You Have registered successfully");
+               res.redirect('login');
+           }
+           else{
+               req.flash("Error","Wrong OTP");
+               res.redirect('verify');
+
+           }
+       }
+       else{
+           req.flash("Error","Please Register First");
+           res.redirect('register');
+       }
+   })
+});
+
+
+
+
 
 
 router.get('/login', (req, res) => {

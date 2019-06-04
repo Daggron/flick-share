@@ -25,11 +25,15 @@ let schema = mongoose.Schema({
     bio: {
         type: String
     },
+    isActive:{
+        type:Boolean
+    },
+    token:{
+        type:String
+    },
     follower: {
         type: Array,
-        add:function add(e){
-            this.user.follower.push(e.value);
-        }
+
     },
     following:{
         type:Array

@@ -14,6 +14,32 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
+const Nexmo = require('nexmo');
+
+const nexmo = new Nexmo({
+    apiKey: 'ac2e5d8e',
+    apiSecret: 'faYyjoFFY4i7TwQW'
+});
+
+
+const accountSid = 'AC030e3ae76369f9ff3b4a6f3a3964b780';
+const authToken = '5e9378ca21e0fd32c9b2eb4a45e2245d';
+
+// require the Twilio module and create a REST client
+const client = require('twilio')(accountSid, authToken);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //for mailing the confirmation mail
@@ -70,16 +96,13 @@ router.get('/', (req, res) => {
 //For registeration
 router.get('/register', (req, res) => {
     res.render('registeration', {errors: ''});
-    User.find({isActive:false},(err,user)=>{
+
        User.remove({isActive:false},(err)=>{
            if (err) throw err;
            console.log("Kenny dit it");
            console.log("Deleted by Kenny The Cleaner Vtriggerrrrrrrrrrrrrrrrrrrrrrrrrrrrr!!!!!!!!!!!!!!!!!!");
        });
-    });
-    User.find({},(err,user)=>{
-        console.log(user);
-    })
+
 });
 
 
@@ -185,8 +208,35 @@ router.post('/register', urlencoded, (req, res) => {
                                         if(err ) throw  err;
                                         console.log("Mail Sent");
                                     });
+                                    //
+                                    // const from = 'Nexmo';
+                                    // const to = `91${user.phone}`;
+                                    // const text = `Hello from Lovedin Your Otp is ${user.token}`;
+                                    //
+                                    // nexmo.message.sendSms(from, to, text);
+                                    //
 
-                                    req.flash('success', 'You Have Registerd Successfully');
+
+
+                                    const from = 'Nexmo';
+                                    const to = `91${user.phone}`;
+                                    const text = `Your OTP for Lovedin is ${user.token} is valid for 5 minutes`;
+
+                                    nexmo.message.sendSms(from, to, text, (err, responseData) => {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
+                                            if(responseData.messages[0]['status'] === "0") {
+                                                console.log("Message sent successfully.");
+                                            } else {
+                                                console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
+                                            }
+                                        }
+                                    });
+
+
+
+                                    req.flash('success', 'Fill The otp here sent to you by your email');
                                     res.redirect('verify');
 
                                 }
@@ -211,6 +261,7 @@ router.get('/verify',(req,res)=>{
 });
 
 router.post('/verify',(req,res)=>{
+
    let query={email:req.body.username};
    User.findOne(query,(err,found)=>{
        if(found){
@@ -344,6 +395,8 @@ router.delete('/:id', (req, res) => {
     });
 
 });
+
+
 
 
 module.exports = router;

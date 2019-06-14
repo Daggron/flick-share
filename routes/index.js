@@ -10,6 +10,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const fs = require('fs');
 const User = require('../models/users');
+const Comment = require('../models/comments');
 
 // using multer disk storage to store the photos uploaded by user
 const storage = multer.diskStorage({
@@ -49,19 +50,40 @@ const storage = multer.diskStorage({
 
 router.get('/',(req,res)=>{
   res.render("home.ejs");
-})
+});
 
 
 router.get('/home',(req,res)=>{
+
     Post.find({},(err,posts)=>{
         if (err) throw err;
-        res.render('index',{
-          posts:posts,
+        Comment.find({},(err,comments)=>{
+            if (err) throw err;
+
+            res.render('index.ejs',{
+                posts:posts,
+                comments:comments,
+            });
+
         });
-      
-        
     });
 });
+
+
+  router.post('/home',(req,res)=>{
+      // let hour=Date.getHours();
+      // let minute=Date.getMinutes();
+      let comment = new Comment({
+          postedBy: req.user._id,
+          postedOn: req.body.postid,
+          author:req.user.username,
+          content:req.body.content
+      });
+      comment.save();
+      console.log(comment);
+      res.redirect('/home');
+
+  });
 
 
 router.get('/add/stories',(req,res)=>{
@@ -112,6 +134,16 @@ router.post('/add/stories',urlencoded,(req,res)=>{
 });
 
 
+router.get('/home/:id',(req,res)=>{
+    Post.findById({_id:req.params.id},(err,posts)=>{
+        Comment.find({postedOn:req.params.id},(err,comments)=>{
+            res.render('details.ejs',{posts:posts,comments:comments});
+        });
+
+    });
+});
+
+
 
 router.delete('/home/:id',(req,res)=>{
   let query = {_id:req.params.id};
@@ -140,12 +172,6 @@ router.delete('/home/:id',(req,res)=>{
 });
 
 // to handle delete requests urls
-router.get('/home/:id',(req,res)=>{
-  Post.findById({_id:req.params.id},(err,posts)=>{
-    res.redirect('/home')
-  });
-});
-
 
 
 module.exports=router;

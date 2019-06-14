@@ -8,7 +8,7 @@ $('document').ready(function(){
             success:function(response){
                 alert('Article Deleted');
 
-                window.location.href('/');
+                window.location.replace('/home');
             }
         })
     });
@@ -37,5 +37,23 @@ $('document').ready(function(){
                 window.location.replace('/home');
             }
         });
-    })
+    });
+    $('.content').on('submit', function(){
+
+        var item = $('.content');
+        var comment = {item: item.val()};
+
+        $.ajax({
+            type: 'POST',
+            url: '/home',
+            data: comment,
+            success: function(data){
+                //do something with the data via front-end framework
+                alert(data);
+            }
+        });
+
+        return false;
+
+    });
 });

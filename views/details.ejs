@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="/css/style.css">
 
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Akronim&display=swap" rel="stylesheet">
     </head>
     <body>
 
@@ -21,27 +22,41 @@
 
         <div class="container">
           <div class="outer-box">
-              <div class="inbox">
+              <div class="inbox bg-white">
                   <div class="post-container">
                       <div class="post-image">
                         <img src="/<%= posts.image %>">
                       </div>
                       <div class="time-stamp">
                           <p>
-                              <em>#time-here</em>
+                              <em><%= posts.timeStamp %></em>
                           </p>
                       </div>
                       <div class="post-caption">
-                          <p class="caption">
+                          <p class="caption" style="line-height: 1.5">
                               <strong class="user-name">
-                                  #user-name
+                                  <%= posts.author%>
                               </strong>
                               <%= posts.caption %>
                           </p>
                       </div>
+
+
+                      <div class="comments-details">
+                          <% for (var i=0;i<comments.length;i++){ %>
+                          <div class="single-comment-detail">
+                              <p>
+                                <span class="author"><%=comments[i].author %> </span> &nbsp; <%= comments[i].content%>
+                              </p>
+                          </div>
+                          <% } %>
+                      </div>
+                      <% if(users._id == posts.posted){ %>
                       <div class="del">
-                            <a href="#" data-id="<%= posts.id %>" class="btn del-post" >Delete</a>
-                        </div>
+                          <a href="home/<%= posts.id %>" data-id="<%= posts.id %>" class="btn del-post">Delete
+                              Post</a>
+                      </div>
+                      <% } %>
                 </div>
               </div>
           </div>

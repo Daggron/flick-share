@@ -25,8 +25,14 @@ let schema = mongoose.Schema({
     bio: {
         type: String
     },
+    role:{
+        type:String,
+    },
     isActive:{
         type:Boolean
+    },
+    State:{
+      type:String
     },
     token:{
         type:String

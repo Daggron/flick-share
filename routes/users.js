@@ -168,7 +168,9 @@ router.post('/register', urlencoded, (req, res) => {
                         bio: bio,
                         profile:`profile/${req.file.filename}`,
                         token:Math.floor(Math.random()*1000000)+1,
-                        isActive:false
+                        isActive:false,
+                        State:'active',
+                        role:'enduser',
 
                     });
                     console.log("Token"+user.token);
@@ -336,8 +338,8 @@ router.post('/update/:id', urlencoded, (req, res) => {
         let query = {_id: req.params.id};
         User.update(query, user, (err) => {
             res.redirect('/users/');
-        })
-    })
+        });
+    });
 
 
 });
@@ -372,7 +374,7 @@ router.get('/:id', (req, res) => {
             console.log(req.user.follower);
             console.log(req.user.name);
         });
-    })
+    });
 });
 
 
@@ -387,6 +389,9 @@ router.delete('/:id', (req, res) => {
         //     if (err) throw err;
         // });
         //to remove the post
+       Post.remove({posted:req.params.id},(err)=>{
+           if(err) throw  err;
+       });
         User.deleteOne(found, (err) => {
             if (err) throw err;
             res.send('success');

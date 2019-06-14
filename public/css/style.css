@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Satisfy&display=swap');
+
+
+
+
 body,html{
     margin:0;
     padding: 0;
@@ -39,7 +43,7 @@ nav li a img{
     width: 100%;
     border:1px solid #9e9a9a;
     margin-top: 2%;
-    border-radius:10px;
+
     background: #ffffff;
 }
 
@@ -53,8 +57,7 @@ nav li a img{
     height: 500px;
     object-fit: fill;
     object-position: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px; 
+
 }
 
 .post-container .del{
@@ -298,9 +301,17 @@ p{
 
 .user-box{
     width: 50%;
-    margin-left: 25%;
+    margin-left: 2%;
     margin-top: 10%;
     background: #ffffff;
+}
+
+
+
+.button-box{
+    margin-left: 5%;
+    width: 80%;
+    height: auto;
 }
 
 .user-profile .image{
@@ -339,4 +350,179 @@ p{
     font-family: 'Satisfy', cursive;
     margin: 3%;
     text-align: left;
+}
+
+.comments{
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+.single-comment{
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    height: 20px;
+}
+
+.single-comment h5{
+    font-size: 15px;
+}
+
+
+.comments-details{
+    max-height: 100px;
+    overflow-y: scroll;
+    overflow-scrolling: auto;
+    overflow-style: marquee-line;
+}
+
+.single-comment-detail{
+    border-bottom: 1px solid grey;
+    height: 20px;
+}
+
+
+.user-name{
+    color: #6573d0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.caption{
+    font-family:  'Satisfy', cursive;
+    font-size: 20px;
+}
+
+.author{
+    color: #6573d0;
+}
+
+
+.top-bar{
+    border-bottom: 2px solid grey;
+}
+
+.propic {
+    height: auto;
+    width: 100%;
+}
+.box-toolbar{
+    width: 100%;
+    height:50px;
+    text-after-overflow: none;
+    text-align: center;
+}
+.propic-inbox{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    object-position: center;
+    text-align: right;
+}
+
+.propic-inbox img{
+    width: 100%;
+    height: 50px!important;
+    border-radius: 25px;
+    border:3px solid black;
+}
+
+.box-toolbar h6{
+
+    float: left;
+    margin-top: -5%;
+    margin-left: 10%;
+}
+
+.post-caption p{
+   color: #777777;
+}
+
+
+.user-name{
+    color: #1b1b1b;
+}
+
+.single-comment h5{
+    color: #777777;
+}
+
+.user-name-comments{
+    font-size: 15px;
+    color: #1b1b1b;
+}
+
+
+.form{
+    margin-top: 3%;
+}
+::placeholder{
+    color: #6573d0;
+}
+
+
+
+
+
+
+/* Main Css starts from here */
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.heading {
+    text-align: center;
+}
+.heading h1{
+    font-family: 'Akronim', cursive;
+    letter-spacing: 4px;
+}
+.register-form{
+    border: 3px solid #6573d0;
+    border-radius: 10px;
+    margin-top: 5%;
+
+
+}
+
+.funky-text{
+    color: #ff8900;
+}
+
+.spunky-text{
+    color: #ff0a74;
+}
+
+.register{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background: url(../images/register.jpg);
+    background-position: center;
+    margin-top: -2%;
+}
+
+
+
+
+.input-field>label{
+    color:  #ffffff
+}
+
+
+input[type='text'],input[type='email'],input[type='tel']{
+    color: #ff8900;
+}
+
+input[type='password']{
+    color: black;
+    font-size: 20px;
+}
+
+
+
+
+#particles-js{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
 }

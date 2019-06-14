@@ -21,9 +21,13 @@
     "multer": "^1.4.1",
     "nexmo": "^2.4.1",
     "nodemailer": "^6.2.1",
-    "nodemon": "^1.19.0",
+    "nodemon": "^1.19.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "tailwindcss": "^1.0.4",
     "twilio": "^3.31.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^1.0.4"
   }
 }

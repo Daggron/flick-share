@@ -20,7 +20,7 @@ module.exports = function(passport){
       bcrypt.compare(password, user.password, (err, isMatch)=>{
         if(err) throw err;
         if(isMatch){
-          if(user.isActive) {
+          if(user.isActive && user.State=='active') {
             return done(null, user);
           }
           else{

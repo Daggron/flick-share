@@ -16,6 +16,9 @@ let schema = mongoose.Schema({
     },
     timeStamp:{
         type:String
+    },
+    userimage:{
+        type:String
     }
 
 });

@@ -37,6 +37,9 @@ let schema = mongoose.Schema({
     token:{
         type:String
     },
+    type:{
+        type:String
+    },
     follower: {
         type: Array,
 

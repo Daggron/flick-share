@@ -42,7 +42,7 @@ nav li a img{
     height: auto;
     width: 100%;
     border:1px solid #9e9a9a;
-    margin-top: 2%;
+    margin-top: 6%;
 
     background: #ffffff;
 }
@@ -370,24 +370,30 @@ p{
 .comments-details{
     max-height: 100px;
     overflow-y: scroll;
-    overflow-scrolling: auto;
-    overflow-style: marquee-line;
 }
 
 .single-comment-detail{
-    border-bottom: 1px solid grey;
-    height: 20px;
-}
 
+    height: 30px;
+    line-height: 1.5em!important;
+}
+.single-comment-detail p{
+    font-size: 15px;
+    height: 30px;
+    line-height: 1.5em!important;
+    border-bottom: 1px solid grey;
+}
 
 .user-name{
     color: #6573d0;
     font-family: 'Montserrat', sans-serif;
+    line-height: 1.5em;
 }
 
 .caption{
     font-family:  'Satisfy', cursive;
     font-size: 20px;
+    line-height: 1.5em;
 }
 
 .author{
@@ -399,6 +405,10 @@ p{
     border-bottom: 2px solid grey;
 }
 
+.time-stamp p em{
+    line-height: 1.5em!important;
+    margin: 1%;
+}
 .propic {
     height: auto;
     width: 100%;
@@ -422,6 +432,7 @@ p{
     height: 50px!important;
     border-radius: 25px;
     border:3px solid black;
+    line-height: 1.5em;
 }
 
 .box-toolbar h6{
@@ -433,6 +444,7 @@ p{
 
 .post-caption p{
    color: #777777;
+    line-height: 1.5em!important;
 }
 
 
@@ -442,6 +454,7 @@ p{
 
 .single-comment h5{
     color: #777777;
+    line-height: 1.5em!important;
 }
 
 .user-name-comments{
@@ -450,9 +463,6 @@ p{
 }
 
 
-.form{
-    margin-top: 3%;
-}
 ::placeholder{
     color: #6573d0;
 }
@@ -480,7 +490,6 @@ p{
     border-radius: 10px;
     margin-top: 5%;
 
-
 }
 
 .funky-text{
@@ -494,18 +503,18 @@ p{
 .register{
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 110vh;
+    height: auto;
     width: 100vw;
-    background: url(../images/register.jpg);
-    background-position: center;
-    margin-top: -2%;
+    background-size: cover;
+
 }
 
 
 
 
 .input-field>label{
-    color:  #ffffff
+    color:  #e6891d;
 }
 
 
@@ -525,4 +534,37 @@ input[type='password']{
     position: absolute;
     height: 100vh;
     width: 100vw;
+    z-index: 0;
+}
+
+
+
+.heading hr{
+    width: 30%;
+    margin: auto;
+    background: #6573d0;
+    color: #6573d0;
+    height: 1px;
+}
+
+input[type='submit']{
+    position: absolute!important;
+    z-index: 0 ;
+    margin-top: -1%;
+    margin-left: 1%;
+    border-radius: 4px;
+    background: #ff8900;
+}
+
+
+input[type='submit']:hover{
+    background: #6573d0;
+}
+
+.btn{
+    background: #ff8900;
+}
+
+.btn:hover{
+    background: #6573d0;
 }

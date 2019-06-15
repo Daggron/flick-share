@@ -113,6 +113,7 @@ router.post('/add/stories',urlencoded,(req,res)=>{
             post.caption=req.body.caption;
             post.image=`static/${req.file.filename}`;
             post.posted=req.user._id;
+            post.userimage=req.user.profile;
             var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
             let time = new Date();
             post.timeStamp=months[time.getMonth()]+""+time.getDate();
@@ -125,7 +126,7 @@ router.post('/add/stories',urlencoded,(req,res)=>{
               else{
                  req.flash('Success','Article Added');
                   res.redirect('/home');
-
+                  console.log(post);
               }
             });
           }

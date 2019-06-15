@@ -118,6 +118,7 @@ router.post('/register', urlencoded, (req, res) => {
         const phone = req.body.phoneNumber;
         const bio = req.body.bio;
         const profile=req.body.profile;
+        const type=req.body.type;
 
         console.log(name + " " + email + " " + password + " " + password2 + " " + unmae);
         req.checkBody('name', 'Name is required').notEmpty();
@@ -126,6 +127,7 @@ router.post('/register', urlencoded, (req, res) => {
         req.checkBody('password', 'Password is required').notEmpty();
         req.checkBody('password2', 'Password Do not Match').equals(req.body.password);
         req.checkBody('phoneNumber', 'Please Enter a valid phone number').notEmpty();
+        req.checkBody('type','Please Select your current love life status').notEmpty();
         //req.checkBody('profile',"Please Upload a profile photo").notEmpty();
         let errors = req.validationErrors();
 
@@ -171,6 +173,7 @@ router.post('/register', urlencoded, (req, res) => {
                         isActive:false,
                         State:'active',
                         role:'enduser',
+                        type:type
 
                     });
                     console.log("Token"+user.token);

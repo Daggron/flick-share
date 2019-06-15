@@ -13,14 +13,19 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Akronim&display=swap" rel="stylesheet">
     <script src="/js/particles.min.js"></script>
+    <script src="https://unpkg.com/typewriter-effect/dist/core.js"></script>
 </head>
 <body>
 <section class="register">
 
     <div id="particles-js"></div>
     <div class="heading">
-        <h1>
-            <span class="funky-text">Regis</span><span class="spunky-text">ter Here</span>
+        <h1 id="app" class="spunky-text">
+
+        </h1>
+        <hr>
+        <h1 id="app2" class="funky-text">
+
         </h1>
     </div>
 
@@ -58,6 +63,11 @@
                     <input id="bio" name="bio" type="text" class="validate">
                     <label for="bio">Bio</label>
                 </div>
+                <div class="input-field col s12">
+                    <input id="type" name="type" type="text" class="validate">
+                    <label for="type">Single,Taken,Breakup</label>
+                </div>
+
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="email" type="email" class="validate" name="email">
@@ -96,6 +106,30 @@
     particlesJS.load('particles-js', '/js/particles.json', function() {
         console.log('callback - particles.js config loaded');
     });
+
+    var app = document.getElementById('app');
+
+    var typewriter = new Typewriter(app, {
+        loop: true
+    });
+
+    typewriter.typeString('Register Here')
+        .pauseFor(2500)
+        .deleteAll()
+        .pauseFor(2500)
+        .start();
+
+    var app2 = document.getElementById('app2');
+
+    var typewriter = new Typewriter(app2, {
+        loop: true
+    });
+
+    typewriter.typeString('To get Started')
+        .pauseFor(2500)
+        .deleteAll()
+        .pauseFor(2500)
+        .start();
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
